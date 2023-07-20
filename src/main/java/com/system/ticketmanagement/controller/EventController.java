@@ -33,11 +33,12 @@ public class EventController {
         }
 
         Optional<Venue> venueOptional = Optional.empty();
+        Optional<EventType> eventTypeOptional = Optional.empty();
+
         if (venueId != null) {
             venueOptional = venueService.findVenueById(venueId);
         }
 
-        Optional<EventType> eventTypeOptional = Optional.empty();
         if (eventTypeName != null) {
             eventTypeOptional = eventTypeService.findEventTypeByName(eventTypeName);
         }
