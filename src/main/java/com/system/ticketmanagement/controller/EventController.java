@@ -25,7 +25,7 @@ public class EventController {
     }
 
     @GetMapping("/api/events")
-    public List<Event> getEventsByVenueIdAndType(@RequestParam(value = "venueId", required = false) Long venueId,
+    public List<Event> getEvents(@RequestParam(value = "venueId", required = false) Long venueId,
                                                  @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
 
         if (venueId == null && eventTypeName == null) {
