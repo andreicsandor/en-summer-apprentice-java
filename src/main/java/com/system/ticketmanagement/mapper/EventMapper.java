@@ -2,13 +2,13 @@ package com.system.ticketmanagement.mapper;
 
 import com.system.ticketmanagement.dto.EventDTO;
 import com.system.ticketmanagement.model.Event;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EventMapper {
-    public EventMapper() {
-    }
 
     public EventDTO convertDTO(Event event) {
         EventDTO eventDTO = new EventDTO();
