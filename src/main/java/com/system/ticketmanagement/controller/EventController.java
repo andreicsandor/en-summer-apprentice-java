@@ -24,23 +24,33 @@ public class EventController {
         this.venueService = venueService;
     }
 
-    @RequestMapping("/api/events")
-    public List<Event> getEvents(){
-        return eventService.findEvents();
-    }
+    @GetMapping("/api/events")
+    public List<Event> getEventsByVenueIdAndType(@RequestParam(value = "venueId", required = false) Long venueId,
+                                                 @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
 
-    @GetMapping("/api/events?venueId={venueId}&eventType={eventTypeName}")
-    public List<Event> getEventsByVenueIdAndType(@PathVariable Long venueId, @PathVariable String eventTypeName) {
-        Optional<Venue> venueOptional = venueService.findVenueById(venueId);
-        Optional<EventType> eventTypeOptional = eventTypeService.findEventTypeByName(eventTypeName);
+        if (venueId == null && eventTypeName == null) {
+            return eventService.findEvents();
+        }
+
+        Optional<Venue> venueOptional = Optional.empty();
+        if (venueId != null) {
+            venueOptional = venueService.findVenueById(venueId);
+        }
+
+        Optional<EventType> eventTypeOptional = Optional.empty();
+        if (eventTypeName != null) {
+            eventTypeOptional = eventTypeService.findEventTypeByName(eventTypeName);
+        }
 
         if (venueOptional.isPresent() && eventTypeOptional.isPresent()) {
             return eventService.findEventsByVenueAndType(venueOptional.get(), eventTypeOptional.get());
-        } else if (venueOptional.isPresent() && !eventTypeOptional.isPresent()) {
+        } else if (venueOptional.isPresent()) {
             return eventService.findEventsByVenue(venueOptional.get());
-        } else if (!venueOptional.isPresent() && eventTypeOptional.isPresent()) {
+        } else if (eventTypeOptional.isPresent()) {
             return eventService.findEventsByType(eventTypeOptional.get());
-        } else return Collections.emptyList();
+        }
+
+        return Collections.emptyList();
     }
 }
 
