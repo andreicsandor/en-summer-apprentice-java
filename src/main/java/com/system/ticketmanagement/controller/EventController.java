@@ -1,5 +1,7 @@
 package com.system.ticketmanagement.controller;
 
+import com.system.ticketmanagement.dto.EventDTO;
+import com.system.ticketmanagement.mapper.EventMapper;
 import com.system.ticketmanagement.model.Event;
 import com.system.ticketmanagement.model.EventType;
 import com.system.ticketmanagement.model.Venue;
@@ -25,11 +27,13 @@ public class EventController {
     }
 
     @GetMapping("/api/events")
-    public List<Event> getEvents(@RequestParam(value = "venueId", required = false) Long venueId,
-                                                 @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
+    public List<EventDTO> getEvents(@RequestParam(value = "venueId", required = false) Long venueId,
+                                    @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
+
+        EventMapper eventMapper = new EventMapper();
 
         if (venueId == null && eventTypeName == null) {
-            return eventService.findEvents();
+            return eventMapper.convertDTOs(eventService.findEvents());
         }
 
         Optional<Venue> venueOptional = Optional.empty();
@@ -44,11 +48,11 @@ public class EventController {
         }
 
         if (venueOptional.isPresent() && eventTypeOptional.isPresent()) {
-            return eventService.findEventsByVenueAndType(venueOptional.get(), eventTypeOptional.get());
+            return eventMapper.convertDTOs(eventService.findEventsByVenueAndType(venueOptional.get(), eventTypeOptional.get()));
         } else if (venueOptional.isPresent()) {
-            return eventService.findEventsByVenue(venueOptional.get());
+            return eventMapper.convertDTOs(eventService.findEventsByVenue(venueOptional.get()));
         } else if (eventTypeOptional.isPresent()) {
-            return eventService.findEventsByType(eventTypeOptional.get());
+            return eventMapper.convertDTOs(eventService.findEventsByType(eventTypeOptional.get()));
         }
 
         return Collections.emptyList();
