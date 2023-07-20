@@ -1,5 +1,6 @@
 package com.system.ticketmanagement.service;
 
+import com.system.ticketmanagement.model.EventType;
 import com.system.ticketmanagement.model.Venue;
 import com.system.ticketmanagement.repository.IVenueDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,13 @@ public class VenueService implements IVenueService {
     private IVenueDAO venueDAO;
 
     @Override
-    public Optional<Venue> findVenueById(Long venueId) {
-        Optional<Venue> venue = venueDAO.findById(venueId);
-        return venue;
+    public Venue findVenueById(Long venueId) {
+        Optional<Venue> venue = venueDAO.searchById(venueId);
+
+        if (venue.isPresent()) {
+            return venue.get();
+        }
+
+        return null;
     }
 }

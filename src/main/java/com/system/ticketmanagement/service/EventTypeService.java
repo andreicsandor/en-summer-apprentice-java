@@ -14,8 +14,13 @@ public class EventTypeService implements IEventTypeService {
     private IEventTypeDAO eventTypeDAO;
 
     @Override
-    public Optional<EventType> findEventTypeByName(String eventTypeName) {
-        Optional<EventType> eventType = eventTypeDAO.findByName(eventTypeName);
-        return eventType;
+    public EventType findEventTypeByName(String eventTypeName) {
+        Optional<EventType> eventType = eventTypeDAO.searchByName(eventTypeName);
+
+        if (eventType.isPresent()) {
+            return eventType.get();
+        }
+
+        return null;
     }
 }
