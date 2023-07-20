@@ -38,9 +38,9 @@ public class EventService implements IEventService {
         if (venue != null && eventType != null) {
             List<Event> events = eventDAO.searchByVenueAndType(venue, eventType);
             return eventMapper.convertDTOs(events);
-        } else {
-            return Collections.EMPTY_LIST;
         }
+
+        return Collections.EMPTY_LIST;
     }
 
     @Override
@@ -50,9 +50,9 @@ public class EventService implements IEventService {
         if (venue != null) {
             List<Event> events = eventDAO.searchByVenue(venue);
             return eventMapper.convertDTOs(events);
-        } else {
-            return Collections.EMPTY_LIST;
         }
+
+        return Collections.EMPTY_LIST;
     }
 
     @Override
