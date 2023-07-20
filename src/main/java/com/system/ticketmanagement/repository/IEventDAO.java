@@ -4,9 +4,11 @@ import com.system.ticketmanagement.model.Event;
 import com.system.ticketmanagement.model.EventType;
 import com.system.ticketmanagement.model.Venue;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface IEventDAO extends CrudRepository<Event, Long> {
     List<Event> findAll();
     List<Event> searchByVenueAndType(Venue venue, EventType eventType);
