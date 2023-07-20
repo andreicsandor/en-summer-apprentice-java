@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface EventTypeDAO extends CrudRepository<EventType, Long> {
+public interface IEventTypeDAO extends CrudRepository<EventType, Long> {
     Optional<EventType> findByName(String name);
 }

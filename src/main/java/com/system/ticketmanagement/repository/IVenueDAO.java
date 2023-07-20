@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface VenueDAO extends CrudRepository<Venue, Long> {
+public interface IVenueDAO extends CrudRepository<Venue, Long> {
     Optional<Venue> findById(Long id);
 }

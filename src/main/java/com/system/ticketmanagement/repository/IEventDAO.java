@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface EventDAO extends CrudRepository<Event, Long> {
+public interface IEventDAO extends CrudRepository<Event, Long> {
     List<Event> findAll();
     List<Event> searchByVenueAndType(Venue venue, EventType eventType);
     List<Event> searchByVenue(Venue venue);
