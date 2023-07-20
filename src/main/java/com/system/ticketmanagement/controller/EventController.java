@@ -41,8 +41,10 @@ public class EventController {
         }
 
         if (events.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Events not found");
-        } else return events;
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No events found");
+        }
+
+        return events;
     }
 }
 
