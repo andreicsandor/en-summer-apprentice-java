@@ -1,6 +1,9 @@
 package com.system.ticketmanagement.dto;
 
+import com.system.ticketmanagement.model.TicketCategory;
+
 import java.util.Date;
+import java.util.List;
 
 public class EventDTO {
     private String name;
@@ -10,11 +13,12 @@ public class EventDTO {
     private String locationType;
     private Date startDate;
     private Date endDate;
+    private List<TicketCategoryDTO> ticketCategories;
 
     public EventDTO() {
     }
 
-    public EventDTO(String name, String eventType, String description, String location, String locationType, Date startDate, Date endDate) {
+    public EventDTO(String name, String eventType, String description, String location, String locationType, Date startDate, Date endDate, List<TicketCategoryDTO> ticketCategories) {
         this.name = name;
         this.eventType = eventType;
         this.description = description;
@@ -22,6 +26,7 @@ public class EventDTO {
         this.locationType = locationType;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.ticketCategories = ticketCategories;
     }
 
     public String getName() {
@@ -78,6 +83,14 @@ public class EventDTO {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public List<TicketCategoryDTO> getTicketCategories() {
+        return ticketCategories;
+    }
+
+    public void setTicketCategories(List<TicketCategoryDTO> ticketCategories) {
+        this.ticketCategories = ticketCategories;
     }
 }
 

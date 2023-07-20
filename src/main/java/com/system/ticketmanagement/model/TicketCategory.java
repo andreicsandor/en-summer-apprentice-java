@@ -3,7 +3,6 @@ package com.system.ticketmanagement.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Table(name="TicketCategory")

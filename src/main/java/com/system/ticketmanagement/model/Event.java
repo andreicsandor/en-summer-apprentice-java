@@ -3,6 +3,7 @@ package com.system.ticketmanagement.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Event")
@@ -31,6 +32,9 @@ public class Event {
 
     @Column(name = "end_date", nullable = false)
     private Date endDate;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    private List<TicketCategory> ticketCategories;
 
     public Event() {
     }
@@ -98,6 +102,14 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public List<TicketCategory> getTicketCategories() {
+        return ticketCategories;
+    }
+
+    public void setTicketCategories(List<TicketCategory> ticketCategories) {
+        this.ticketCategories = ticketCategories;
     }
 
     @Override
