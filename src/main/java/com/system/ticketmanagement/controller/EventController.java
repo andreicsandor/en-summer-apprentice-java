@@ -1,17 +1,15 @@
 package com.system.ticketmanagement.controller;
 
 import com.system.ticketmanagement.dto.EventDTO;
-import com.system.ticketmanagement.mapper.EventMapper;
-import com.system.ticketmanagement.model.EventType;
-import com.system.ticketmanagement.model.Venue;
 import com.system.ticketmanagement.service.IEventService;
 import com.system.ticketmanagement.service.IEventTypeService;
 import com.system.ticketmanagement.service.IVenueService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EventController {
@@ -25,36 +23,26 @@ public class EventController {
         this.venueService = venueService;
     }
 
-    @GetMapping("/api/events")
+    @GetMapping("/events")
     public List<EventDTO> getEvents(@RequestParam(value = "venueId", required = false) Long venueId,
                                     @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
-
-        EventMapper eventMapper = new EventMapper();
+        List<EventDTO> events;
 
         if (venueId == null && eventTypeName == null) {
-            return eventMapper.convertDTOs(eventService.findEvents());
+            events = eventService.findEvents();
+        } else if (venueId != null && eventTypeName == null) {
+            events = eventService.findEventsByVenue(venueId);
+        } else if (venueId == null && eventTypeName != null) {
+            events = eventService.findEventsByType(eventTypeName);
+        } else if (venueId != null && eventTypeName != null) {
+            events = eventService.findEventsByVenueAndType(venueId, eventTypeName);
+        } else {
+            events = Collections.emptyList();
         }
 
-        Optional<Venue> venueOptional = Optional.empty();
-        Optional<EventType> eventTypeOptional = Optional.empty();
-
-        if (venueId != null) {
-            venueOptional = venueService.findVenueById(venueId);
-        }
-
-        if (eventTypeName != null) {
-            eventTypeOptional = eventTypeService.findEventTypeByName(eventTypeName);
-        }
-
-        if (venueOptional.isPresent() && eventTypeOptional.isPresent()) {
-            return eventMapper.convertDTOs(eventService.findEventsByVenueAndType(venueOptional.get(), eventTypeOptional.get()));
-        } else if (venueOptional.isPresent()) {
-            return eventMapper.convertDTOs(eventService.findEventsByVenue(venueOptional.get()));
-        } else if (eventTypeOptional.isPresent()) {
-            return eventMapper.convertDTOs(eventService.findEventsByType(eventTypeOptional.get()));
-        }
-
-        return Collections.emptyList();
+        if (events.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Events not found");
+        } else return events;
     }
 }
 
