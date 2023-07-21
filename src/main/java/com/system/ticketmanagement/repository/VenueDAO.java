@@ -1,12 +1,12 @@
 package com.system.ticketmanagement.repository;
 
-import com.system.ticketmanagement.model.Customer;
+import com.system.ticketmanagement.model.Venue;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ICustomerDAO extends CrudRepository<Customer, Long> {
-    Optional<Customer> searchById(Long id);
+public interface VenueDAO extends CrudRepository<Venue, Long> {
+    Optional<Venue> searchById(Long id);
 }

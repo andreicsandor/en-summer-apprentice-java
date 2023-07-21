@@ -1,9 +1,9 @@
 package com.system.ticketmanagement.controller;
 
 import com.system.ticketmanagement.dto.EventDTO;
-import com.system.ticketmanagement.service.IEventService;
-import com.system.ticketmanagement.service.IEventTypeService;
-import com.system.ticketmanagement.service.IVenueService;
+import com.system.ticketmanagement.service.EventService;
+import com.system.ticketmanagement.service.EventTypeService;
+import com.system.ticketmanagement.service.VenueService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 public class EventController {
-    private IEventService eventService;
-    private IEventTypeService eventTypeService;
-    private IVenueService venueService;
+    private EventService eventService;
+    private EventTypeService eventTypeService;
+    private VenueService venueService;
 
-    public EventController(IEventService eventService, IEventTypeService eventTypeService, IVenueService venueService) {
+    public EventController(EventService eventService, EventTypeService eventTypeService, VenueService venueService) {
         this.eventService = eventService;
         this.eventTypeService = eventTypeService;
         this.venueService = venueService;

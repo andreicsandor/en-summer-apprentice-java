@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IEventDAO extends CrudRepository<Event, Long> {
+public interface EventDAO extends CrudRepository<Event, Long> {
     List<Event> findAll();
     List<Event> searchByVenueAndType(Venue venue, EventType eventType);
     List<Event> searchByVenue(Venue venue);

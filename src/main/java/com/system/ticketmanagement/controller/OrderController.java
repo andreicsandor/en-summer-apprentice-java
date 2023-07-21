@@ -2,7 +2,7 @@ package com.system.ticketmanagement.controller;
 
 import com.system.ticketmanagement.dto.NewOrderDTO;
 import com.system.ticketmanagement.dto.OrderDTO;
-import com.system.ticketmanagement.service.IOrderService;
+import com.system.ticketmanagement.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +17,9 @@ import java.util.Map;
 
 @RestController
 public class OrderController {
-    private IOrderService orderService;
+    private OrderService orderService;
 
-    public OrderController(IOrderService orderService) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 

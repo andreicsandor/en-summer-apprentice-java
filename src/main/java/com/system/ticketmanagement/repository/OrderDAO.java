@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IOrderDAO extends CrudRepository<Order, Long> {
+public interface OrderDAO extends CrudRepository<Order, Long> {
     List<Order> searchByCustomer(Customer customer);
 }

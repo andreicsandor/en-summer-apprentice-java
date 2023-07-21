@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ITicketCategoryDAO extends CrudRepository<Event, Long> {
+public interface TicketCategoryDAO extends CrudRepository<Event, Long> {
     @Query("SELECT tc FROM TicketCategory tc WHERE tc.id = :id")
     Optional<TicketCategory> searchById(@Param("id") Long id);
 }
