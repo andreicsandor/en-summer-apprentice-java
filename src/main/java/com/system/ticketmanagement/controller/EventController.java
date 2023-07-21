@@ -4,9 +4,7 @@ import com.system.ticketmanagement.dto.EventDTO;
 import com.system.ticketmanagement.service.IEventService;
 import com.system.ticketmanagement.service.IEventTypeService;
 import com.system.ticketmanagement.service.IVenueService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,10 +36,6 @@ public class EventController {
             events = eventService.findEventsByVenueAndType(venueId, eventTypeName);
         } else {
             events = Collections.emptyList();
-        }
-
-        if (events.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No events found");
         }
 
         return events;
