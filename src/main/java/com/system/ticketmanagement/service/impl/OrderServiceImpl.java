@@ -35,7 +35,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO createOrder(NewOrderDTO newOrderDTO) {
         Customer customer = customerService.findCustomerById(1L);
-        System.out.println(customer);
 
         TicketCategory ticketCategory = ticketCategoryService.findTicketCategoryById(newOrderDTO.getTicketCategoryId());
         Integer numberOfTickets = newOrderDTO.getNumberOfTickets();

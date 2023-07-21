@@ -1,25 +1,15 @@
 package com.system.ticketmanagement.dto;
 
 public class NewOrderDTO {
-    private Long eventId;
     private Long ticketCategoryId;
     private Integer numberOfTickets;
 
     public NewOrderDTO() {
     }
 
-    public NewOrderDTO(String eventId, String ticketCategoryId, Integer numberOfTickets) {
-        this.eventId = Long.parseLong(eventId);
+    public NewOrderDTO(String ticketCategoryId, Integer numberOfTickets) {
         this.ticketCategoryId = Long.parseLong(ticketCategoryId);
         this.numberOfTickets = numberOfTickets;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
     }
 
     public Long getTicketCategoryId() {
