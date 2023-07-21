@@ -35,11 +35,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventDTO> findEventsByVenueAndType(Long venueId, String eventTypeName) {
-        Venue venue = venueService.findVenueById(venueId);
-        EventType eventType = eventTypeService.findEventTypeByName(eventTypeName);
+        List<Event> events = eventDAO.searchByVenueAndType(venueId, eventTypeName);
 
-        if (venue != null && eventType != null) {
-            List<Event> events = eventDAO.searchByVenueAndType(venue, eventType);
+        if (!events.isEmpty()) {
             return eventMapper.convertDTOs(events);
         }
 

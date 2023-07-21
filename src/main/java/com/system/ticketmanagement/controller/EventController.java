@@ -23,7 +23,7 @@ public class EventController {
 
     @GetMapping("/events")
     public List<EventDTO> getEvents(@RequestParam(value = "venueId", required = false) Long venueId,
-                                    @RequestParam(value = "eventTypeName", required = false) String eventTypeName) {
+                                    @RequestParam(value = "eventType", required = false) String eventTypeName) {
         List<EventDTO> events;
 
         if (venueId == null && eventTypeName == null) {
